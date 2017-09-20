@@ -9746,7 +9746,7 @@ var ReactDom = __webpack_require__(98);
 ReactDom.render(React.createElement(
   'h1',
   null,
-  'Hello World'
+  'Hello World 2222 !!'
 ), document.getElementById('example'));
 
 /***/ }),
