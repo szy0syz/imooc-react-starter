@@ -1,5 +1,5 @@
 var React = require('react');
-var ReactDom = require('react-dom');
+var ReactDOM = require('react-dom');
 import ComponentHeader from './components/header'
 class Index extends React.Component {
   render() {
@@ -12,10 +12,4 @@ class Index extends React.Component {
   }
 }
 
-ReactDom.render(<Index />, document.getElementById('example'));
-
-
-// ReactDom.render(
-//   <h1>Hello world</h1>,
-//   document.getElementById('example')
-// );
+ReactDOM.render(<Index />, document.getElementById('example'));
