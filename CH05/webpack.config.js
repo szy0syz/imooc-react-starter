@@ -15,15 +15,7 @@ module.exports = {
     ]
   },
   output: {
-    path: __dirname + '/src',
+    path: __dirname + '/dist',
     filename: 'bundle.js'
   }
-  // ,
-  // devServer: {
-  //   contentBase: path.join(__dirname, "src"),
-  //   compress: true,
-  //   port: 9000,
-  //   inline: true,
-  //   hot: true
-  // }
 };
