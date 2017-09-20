@@ -1,12 +1,16 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 import ComponentHeader from './components/header'
+import ComponentFooter from './components/footer'
+import BodyIndex from './components/bodyIndex'
 class Index extends React.Component {
   render() {
+    var Header = <ComponentHeader />;
     return (
       <div>
-      <ComponentHeader />
-      <h2>我是页面的内容</h2>
+        {Header}
+        <BodyIndex />
+        <ComponentFooter />
       </div>
     )
   }
