@@ -5,12 +5,12 @@ export default class BodyIndex extends React.Component {
   // 生命周期函数
   componentWillMount() {
     // 第一次加载组件函数
-    console.log('first time mounting...');
+    console.log('BodyIndex - componentWillMount');
   }
 
   componentDidMount() {
     // 组件加载完
-    console.log('componentDidMount.......');
+    console.log('BodyIndex - componentDidMount');
   }
 
   render() {
