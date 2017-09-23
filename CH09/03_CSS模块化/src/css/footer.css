@@ -1,0 +1,11 @@
+.miniFooter{
+    background-color: forestgreen;
+    color: rebeccapurple;
+    padding-left: 20px;
+    padding-top: 3x;
+    padding-bottom: 3px;
+}
+
+.miniFooter h1{
+    font-size: 15px;
+}
