@@ -113,10 +113,10 @@ class PCHeader extends React.Component {
               {userShow}
             </Menu>
 
-            <Modal title="用户中心" wrapClassName="vertical-center-modal" onOk={() => this.setModalVisable(false)} okText="关闭" onCancel={() => this.state.setModalVisable(false)} visible={this.state.modalVisable}>
+            <Modal title="用户中心" wrapClassName="vertical-center-modal" onOk={() => this.setModalVisable(false)} okText="关闭" onCancel={() => this.setModalVisable(false)} visible={this.state.modalVisable}>
               <Tabs type="card">
                 <TabPane tab="注册" key="2">
-                  <Form horizontal onSubmit={this.handleSubmit.bind(this)}>
+                  <Form layout="horizontal" onSubmit={this.handleSubmit.bind(this)}>
                     <FormItem lable="账户">
                       <Input placeholder="请输入账号" {...getFieldDecorator('r_userName') } />
                     </FormItem>
