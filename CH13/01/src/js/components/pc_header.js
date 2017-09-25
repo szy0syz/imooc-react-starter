@@ -1,6 +1,7 @@
-import React from 'react';
-import { Row, Col } from 'antd';
+import React, { Component } from 'react';
 import {
+  Col,
+  Row,
   Menu,
   Icon,
   Tabs,
@@ -23,7 +24,7 @@ const TabPane = Tabs.TabPane;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
-class PCHeader extends React.Component {
+class PCHeader extends Component {
   constructor() {
     super();
     this.state = {
@@ -40,6 +41,22 @@ class PCHeader extends React.Component {
     this.setState({ modalVisable: value });
   };
 
+  checkPassword(rule, value, callback) {
+    const form = this.props.form;
+    if (value && value !== form.getFieldValue('r_password')) {
+      callback('Two passwords that you enter is inconsistent!');
+    } else {
+      callback();
+    }
+  };
+  checkConfirm(rule, value, callback) {
+    const form = this.props.form;
+    if (value && this.state.confirmDirty) {
+      form.validateFields(['r_confirm'], { force: true });
+    }
+    callback();
+  }
+
   handleClick(e) {
     if (e.key === 'register') {
       // 将注册指示高亮
@@ -53,7 +70,29 @@ class PCHeader extends React.Component {
   }
 
   handleSubmit(e) {
+    const form = this.props.form;
     //页面开始向 API 提交数据
+    e.preventDefault(); // 阻止冒泡
+    var myFetchOptions = {
+      method: 'GET'
+    };
+    this.props.form.validateFieldsAndScroll((err, formData) => {
+      if (!err) {
+        console.log('Received values of form: ', formData);
+        fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action
+          + "&username=" + formData.r_nickname + "&password=" + formData.r_password
+          + "&r_userName=" + formData.r_nickname + "&r_password="
+          + formData.r_password + "&r_confirmPassword="
+          + formData.r_confirm, myFetchOptions)
+          .then(response => response.json())
+          .then(json => {
+            console.log('json', json); // json.NickUserName
+            this.setState({ userNickName: formData.r_nickname, userid: json.UserId });
+          });
+        message.success('请求成功!');
+        this.setModalVisable(false);
+      }
+    });
   }
 
   render() {
@@ -117,14 +156,47 @@ class PCHeader extends React.Component {
               <Tabs type="card">
                 <TabPane tab="注册" key="2">
                   <Form layout="horizontal" onSubmit={this.handleSubmit.bind(this)}>
-                    <FormItem lable="账户">
-                      <Input placeholder="请输入账号" {...getFieldDecorator('r_userName') } />
+                    <FormItem label="昵称">
+                      {getFieldDecorator('r_nickname', {
+                        rules: [{
+                          required: true, message: '请输入昵称!',
+                        }],
+                      })(
+                        <Input placeholder="请输入昵称" />
+                        )}
                     </FormItem>
-                    <FormItem lable="密码">
-                      <Input type="password" placeholder="请输入密码" {...getFieldDecorator('r_password') } />
+                    <FormItem label="账号">
+                      {getFieldDecorator('r_email', {
+                        rules: [{
+                          type: 'email', message: '请输入正确的邮箱!',
+                        }, {
+                          required: true, message: '请输入邮箱账号!',
+                        }],
+                      })(
+                        <Input placeholder="请输入邮箱账号" />
+                        )}
                     </FormItem>
-                    <FormItem lable="确认密码">
-                      <Input type="password" placeholder="请再次输入密码" {...getFieldDecorator('r_confirmPassword') } />
+                    <FormItem label="密码" hasFeedback>
+                      {getFieldDecorator('r_password', {
+                        rules: [{
+                          required: true, message: 'Please input your password!',
+                        }, {
+                          validator: this.checkConfirm.bind(this),
+                        }],
+                      })(
+                        <Input type="password" />
+                        )}
+                    </FormItem>
+                    <FormItem label="确认密码" hasFeedback>
+                      {getFieldDecorator('r_confirm', {
+                        rules: [{
+                          required: true, message: 'Please confirm your password!',
+                        }, {
+                          validator: this.checkPassword.bind(this),
+                        }],
+                      })(
+                        <Input type="password" onBlur={this.handleConfirmBlur} />
+                        )}
                     </FormItem>
                     <Button type="primary" htmlType="submit">注册</Button>
                   </Form>

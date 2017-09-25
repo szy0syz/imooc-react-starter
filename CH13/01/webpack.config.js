@@ -10,7 +10,7 @@ module.exports = {
         test: /\.js?$/, // 正则以.js后缀结尾
         exclude: /(node_modules)/,
         loader: 'babel-loader',
-        query: { presets: ['react', 'es2015'] }
+        query: { presets: ['es2015','react'] }
       },
       //下面是添加的 css 的 loader，也即是 css 模块化的配置方法，大家可以拷贝过去直接使用
       {
