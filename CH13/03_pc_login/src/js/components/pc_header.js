@@ -33,8 +33,7 @@ class PCHeader extends Component {
       action: 'login',
       hasLogined: false,
       userNickName: '',
-      userid: 0,
-      tabPane: "1"
+      userid: 0
     };
   };
 
@@ -71,49 +70,50 @@ class PCHeader extends Component {
   }
 
   changeTabPans(key) {
-    console.log(key);
-    this.setState({ tabPane: key });
+    if (key === "1") {
+      this.setState({ action: 'login' });
+    }
+    if (key === "2") {
+      this.setState({ action: 'register' });
+    }
   }
 
   handleSubmit(e) {
     const form = this.props.form;
-    //页面开始向 API 提交数据
     e.preventDefault(); // 阻止冒泡
     var myFetchOptions = {
       method: 'GET'
     };
-    console.log('tabPane', this.state.tabPane);
-    console.log(typeof this.state.tabPane);
+
     // 如果是登录
-    if (this.state.tabPane === "1") {
-      console.log('登录');
+    if (this.state.action === "login") {
+      this.setState({ hasLogined: true, userNickName: 'jerry' });
       message.success('登录成功!');
       this.setModalVisable(false);
+      return;
     }
 
-    // 如果是注册
-    if (this.state.tabPane === "2") {
-      this.props.form.validateFieldsAndScroll((err, formData) => {
-        if (!err) {
-          console.log('Received values of form: ', formData);
-          fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action
-            + "&username=" + formData.r_nickname + "&password=" + formData.r_password
-            + "&r_userName=" + formData.r_nickname + "&r_password="
-            + formData.r_password + "&r_confirmPassword="
-            + formData.r_confirm, myFetchOptions)
-            .then(response => response.json())
-            .then(json => {
-              console.log('json', json); // json.NickUserName
-              this.setState({ userNickName: formData.r_nickname, userid: json.UserId });
-            });
-          // message.success('请求成功!');
-          // this.setModalVisable(false);
+    this.props.form.validateFieldsAndScroll((err, formData) => {
+      if (!err) {
+        console.log('Received values of form: ', formData);
+        // fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action
+        //   + "&username=" + formData.r_nickname + "&password=" + formData.r_password
+        //   + "&r_userName=" + formData.r_nickname + "&r_password="
+        //   + formData.r_password + "&r_confirmPassword="
+        //   + formData.r_confirm, myFetchOptions)
+        //   .then(response => response.json())
+        //   .then(json => {
+        //     console.log('json', json); // json.NickUserName
+        //     this.setState({ userNickName: formData.r_nickname, userid: json.UserId });
+        //   });
+        // 如果是注册
+        if (this.state.action === "register") {
+          this.setState({ hasLogined: true, userNickName: formData.r_nickname });
+          message.success('注册成功!');
+          this.setModalVisable(false);
         }
-        message.success('注册成功!');
-        this.setModalVisable(false);
-      });
-    }
-
+      }
+    });
   };
 
   render() {
@@ -123,9 +123,9 @@ class PCHeader extends Component {
       <Menu.Item key="logout" className="register">
         <Button type="primary" htmlType="button">{this.state.userNickName}</Button>
         &nbsp;&nbsp;
-      <Link target="_blank">
+      {/* <Link target="_blank">
           <Button type="dashed" htmlType="button">个人中心</Button>
-        </Link>
+      </Link> */}
         &nbsp;&nbsp;
       <Button type="danger" htmlType="button">退出</Button>
       </Menu.Item>
@@ -166,9 +166,6 @@ class PCHeader extends Component {
               </Menu.Item>
               <Menu.Item key="keji">
                 <Icon type="appstore"></Icon>科技
-              </Menu.Item>
-              <Menu.Item key="shishang">
-                <Icon type="appstore"></Icon>时尚
               </Menu.Item>
               {userShow}
             </Menu>
