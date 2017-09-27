@@ -18,13 +18,13 @@ footer{
 }
 
 .container{
-    /* padding-top: 10px; */
     text-align: center;
 }
 
 .leftContainer{
     width: 500px;
     height: 300px;
+    padding-top: 6px;
     float: left;
 }
 
@@ -49,11 +49,37 @@ footer{
     margin-left: 5px;
 } */
 
+
+/*---- PCNewsBlock ------ start -------*/
+.ant-card-body{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.tabs_news{
+    padding-left: 10px;
+    width: 460px;
+    float: left;
+}
+
+.tabs_news li {
+    height: 27px;
+    line-height: 27px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* width: 417px; */
+    float: left;
+}
+/*---- PCNewsBlock ********* end ***********/
+
+
 /*----image block ------ start -------*/
 
-.cardblock{
+/* .cardblock{
     height: 200px;
-}
+} */
 
 .cardblock li{
     list-style: none;

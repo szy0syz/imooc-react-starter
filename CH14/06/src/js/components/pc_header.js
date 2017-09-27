@@ -137,14 +137,14 @@ class PCHeader extends Component {
     return (
       <header>
         <Row>
-          <Col span={2}></Col>
-          <Col span={4}>
+          <Col span={3}></Col>
+          <Col span={3}>
             <a href="/" className="logo">
               <img src="images/logo.png" alt="logo" />
               <span>ReactNews</span>
             </a>
           </Col>
-          <Col span={16}>
+          <Col span={15}>
             <Menu mode="horizontal" onClick={this.handleClick.bind(this)} selectedKeys={[this.state.current]}>
               <Menu.Item key="top">
                 <Icon type="appstore"></Icon>头条
@@ -250,7 +250,7 @@ class PCHeader extends Component {
             </Modal>
 
           </Col>
-          <Col span={2}></Col>
+          <Col span={3}></Col>
         </Row>
 
       </header>
