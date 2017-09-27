@@ -26,7 +26,7 @@ export default class PCNewsContatiner extends React.Component {
                   <div><img src="/images/carousel_4.jpg" />></div>
                 </Carousel>
               </div>
-              <PCNewsImageBlock count={6} type="guoji" width="400px" cartTitle="国际头条" imageWidth="112px"></PCNewsImageBlock>
+              <PCNewsImageBlock count={6} type="guoji" width="500px" cartTitle="国际头条" imageWidth="132px"></PCNewsImageBlock>
             </div>
             <Tabs className="tabs_news">
               <TabPane tab="头条" key="1">

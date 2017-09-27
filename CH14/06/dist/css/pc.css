@@ -18,7 +18,8 @@ footer{
 }
 
 .container{
-    padding-top: 10px;
+    /* padding-top: 10px; */
+    text-align: center;
 }
 
 .leftContainer{
@@ -29,7 +30,7 @@ footer{
 
 .carousel{
     width: 500px;
-    height: 300px;
+    height: 100%;
     float: left;
 }
 
@@ -47,3 +48,27 @@ footer{
 /* .topNewsList{
     margin-left: 5px;
 } */
+
+/*----image block ------ start -------*/
+
+.cardblock{
+    height: 200px;
+}
+
+.cardblock li{
+    list-style: none;
+}
+
+.imageblock {
+    float: left;
+}
+
+.custom-card {
+    padding: 5px;
+}
+
+.custom-card p {
+    color: #999;
+}
+
+/*----image block ------ end -------*/

@@ -30,10 +30,10 @@ export default class PCNewsImageBlock extends React.Component {
       width: this.props.imageWidth,
       whiteSpace: "nowrap",
       overflow: "hidden",
-      textOverflow: "ellipsis"
+      textOverflow: "ellipsis",
+      fontSize: '12px'
     };
     const { news } = this.state;
-    console.log(news);
     const newsList = news.length
       ?
       news.map((item, index) => (
@@ -51,13 +51,13 @@ export default class PCNewsImageBlock extends React.Component {
       ))
       :
       "没有加载到新闻";
-    console.log(newsList);
-    return(
-      <div>
-      <Card title={this.props.cartTitle} bordered={true} style={{ width: this.props.width }}>
-        {newsList}
-      </Card>
-    </div>
+
+    return (
+      <div className="cardblock">
+        <Card title={this.props.cartTitle} bordered={true} style={{ width: this.props.width }}>
+          {newsList}
+        </Card>
+      </div>
     );
   };
 }
